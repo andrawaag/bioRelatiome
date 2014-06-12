@@ -1,4 +1,6 @@
-awk '{print "PREFIX wp: <http://vocabularies.wikipathways.org/wp#>";}'
+awk '{print "PREFIX wp: <http://vocabularies.wikipathways.org/wp#>";
+      print "PREFIX dcterms: <http://purl.org/dc/terms/>"}'
+
 cut -f1,2,9,14 intact.txt |
 awk '{
 	
@@ -23,6 +25,7 @@ awk '{
 	   pubmedIdentifiersorg = "<http://identifiers.org/pubmed/"pmid[2]">";
 	}
 	print interactionIdentifiersOrg " a wp:relation .";
+	print sourceIdentifierOrg " dcterms:relation "targetIdentifierOrg " ."
 	print interactionIdentifiersOrg " wp:source " sourceIdentifierOrg  " .";
 	print interactionIdentifiersOrg " wp:target " targetIdentifierOrg  " .";
 	print interactionIdentifiersOrg " dcterms:references " pubmedIdentifiersorg " .";
