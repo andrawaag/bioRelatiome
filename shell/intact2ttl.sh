@@ -20,7 +20,7 @@ awk '{
 	targetIdentifierOrg = "<http://identifiers.org/"target[1]"/"target[2]">";
 	interactionIdentifiersOrg = "<http://identifiers.org/"interactionId[1]"/"interactionId[2]">";
 	if (pubmed[1] ~ "pubmed") {
-	   pubmedIdentifiersorg = "<http://identifiers.org/pubmed/"pmid[2];
+	   pubmedIdentifiersorg = "<http://identifiers.org/pubmed/"pmid[2]">";
 	}
 	print interactionIdentifiersOrg " a wp:relation .";
 	print interactionIdentifiersOrg " wp:source " sourceIdentifierOrg  " .";
