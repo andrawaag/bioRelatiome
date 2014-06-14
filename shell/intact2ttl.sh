@@ -1,5 +1,6 @@
-awk '{print "PREFIX wp: <http://vocabularies.wikipathways.org/wp#>";
-      print "PREFIX dcterms: <http://purl.org/dc/terms/>"}'
+pwd
+echo "PREFIX wp: <http://vocabularies.wikipathways.org/wp#>">>intact.ttl
+echo "PREFIX dcterms: <http://purl.org/dc/terms/>"  >>intact.ttl
 
 cut -f1,2,9,14 intact.txt |
 awk '{
@@ -15,9 +16,15 @@ awk '{
 	split(interactionIds, interactionId, ":"); 
 	sub(/kb/, "", source[1]);
 	sub(/kb/, "", target[1]);
+	if (interactionId[2] ~/\|/) {
+	    split(interactionId[2], tempinteractionId, "|");
+        interactionId[2] = tempinteractionId[1]
+	    }
 	sub(/\|mint|\|imex/, "", interactionId[2]); 
-	
-
+	if (source[2] ~ /"/) source[2]=source[2]":"source[3];
+	if (target[2] ~ /"/) target[2]=target[2]":"target[3];
+		gsub(/"/, "", source[2]);
+		gsub(/"/, "", target[2]);
 	sourceIdentifierOrg = "<http://identifiers.org/"source[1]"/"source[2]">";
 	targetIdentifierOrg = "<http://identifiers.org/"target[1]"/"target[2]">";
 	interactionIdentifiersOrg = "<http://identifiers.org/"interactionId[1]"/"interactionId[2]">";
