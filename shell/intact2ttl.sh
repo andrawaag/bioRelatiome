@@ -1,7 +1,7 @@
 pwd
 echo "PREFIX wp: <http://vocabularies.wikipathways.org/wp#>">>intact.ttl
 echo "PREFIX dcterms: <http://purl.org/dc/terms/>"  >>intact.ttl
-
+echo "PREFIX sio: <http://semanticscience.org/resource/>" >>intact.ttl
 cut -f1,2,9,14 intact.txt |
 awk '{
 	
@@ -32,7 +32,7 @@ awk '{
 	   pubmedIdentifiersorg = "<http://identifiers.org/pubmed/"pmid[2]">";
 	}
 	print interactionIdentifiersOrg " a wp:relation .";
-	print sourceIdentifierOrg " dcterms:relation "targetIdentifierOrg " ."
+	print sourceIdentifierOrg " sio:SIO_000001 "targetIdentifierOrg " ."
 	print interactionIdentifiersOrg " wp:source " sourceIdentifierOrg  " .";
 	print interactionIdentifiersOrg " wp:target " targetIdentifierOrg  " .";
 	print interactionIdentifiersOrg " dcterms:references " pubmedIdentifiersorg " .";
